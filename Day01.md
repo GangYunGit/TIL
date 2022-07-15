@@ -1,7 +1,5 @@
 # Today I Learned
 
-# Today I Learned
-
 ##  1. Git이란?
 
 - 분산 버전 관리 프로그램
