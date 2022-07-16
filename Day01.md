@@ -49,9 +49,9 @@
 
 
 
-## 3. VS code, Git 세팅
+## 4. VS code, Git 세팅
 
 - Visual Studio Code에서 Git세팅하기
-  - 잘 시간이라 다음에.. 자세한 내용은 밑에 링크
-    - https://www.notion.so/hphk-edu/Day-2-fb042944e9fe422bbf8a5237f22e3048?v=a9a535236e914648ab762ef2d39e56ca
-    - Git 명령어 모음집!!!
+  - 링크 보고 따라하기!
+    - https://www.notion.so/hphk-edu/Git-678be47bdeed4315b7d179191cca7c99
+
