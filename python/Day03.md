@@ -79,7 +79,7 @@
    - 숫자를 직접 적지 않고, 의미단위로 작성 가능
    - 코드 수정이 용이해짐
 - 동일한 변수에 다른 데이터를 언제든 할당할 수 있기 때문에 '변수'라고 불림
-## 식별자
+### 식별자
 - 식별자의 이름은 영문알파셉, 언더스코어(_), 숫자로 구성
 - 첫 글자에 숫자가 올 수 없음
 - 길이 제한이 없고, 대소문자를 구별
@@ -99,7 +99,7 @@ print(5) # 에러 발생(TypeError : 'str' is not callable)
 - 연산자 우선순위
   - 기본적으로 수학에서의 우선순위와 같음
   - 괄호 => 곱하기,나누기 => 더하기 빼기
-## 자료형(Datatype)분류
+### 자료형(Datatype)분류
 - 프로그래밍에서는 다양한 종류의 값(데이터)을 쓸 수 있음
 - 사용할 수 있는 데이터의 종류들을 **자료형**이라고 함
 - 수치형(Numeric Type)
@@ -109,7 +109,7 @@ print(5) # 에러 발생(TypeError : 'str' is not callable)
 - 문자열(String)
 - 불린형(Boolean Type)
 - None
-## 수치형
+### 수치형
 - 정수 자료형(int)
   - 0, 100, -200과 같은 정수를 표현
   - 일반적인 사칙연산 가능
@@ -147,3 +147,84 @@ print(5) # 에러 발생(TypeError : 'str' is not callable)
   # 2. python 3.5이상
   import math
   print(math.isclose(a,b)) #True
+  ```
+---
+# 3교시
+## 문자열 자료형
+### 문자열 자료형의 정의
+- 모든 문자는 str 타입
+- 문자열은 작은 따옴표(')나 큰 따옴표(")를 활용하여 표기
+### 중첩 따옴표
+- 따옴표 안에 따옴표를 표현할 경우
+```python
+print("문자열 안에 '작은 따옴표'를 사용하려면 큰 따옴표로  묶는다.")
+# 문자열 안에 '작은 따옴표'를 사용하려면 큰 따옴표로 묶는다.
+
+print('문자열 안에 "큰 따옴표"를 사용하려면 작은 따옴표로  묶는다.')
+# 문자열 안에 "큰 따옴표"를 사용하려면 작은 따옴표로 묶는다.
+```
+### 삼중 따옴표(Triple Quotes)
+- 작은 따옴표나 큰 따옴표를 삼중으로 사용
+```python
+print('''문자열 안에 '작은 따옴표'나 "큰 따옴표"를 사용할 수 있고 여러 줄을 사용할 때도 편리하다. ''')
+
+# 출력 결과
+문자열 안에 '작은 따옴표'나 
+"큰 따옴표"를 사용할 수 있고 
+여러 줄을 사용할 때도 편리하다.
+```
+### Escape sequence
+- 역슬래시(backslash) 뒤에 특정 문자가 와서 특수한 기능을 하는 문자 조합
+  - \n : 줄바꿈
+  - \t : 탭
+  - \r : 캐리지 리턴(커서를 맨 앞으로 옮기는 기능) ~~잘 안씀~~
+  - \0 : Null
+  - \\\ : \\ (백슬래시 자체를 표현하고 싶을 때)
+  - \\' : 단일 인용 부호(')
+  - \\" : 이중 인용 부호(")
+### 문자열 연산
+- 덧셈
+  - 문자열 덧셈은 문자열을 연결
+  - String Concatenation이라고 함
+  ```python
+  print("Hello" + "World") #HeloWorld
+  ```
+- 곱셈 
+  - 문자열을 곱한만큼 반복
+  ```python
+  print("Python" * 3) #PythonPythonPython
+  ```
+### String Interpolation
+- ~~%-formatting~~ 거의 안씀
+  ```python
+  name = 'Kim'
+  score = 4.5
+  print('Hello, %s' % name) # Hello, Kim
+  print('내 성적은 %d' % score) # 내 성적은 4
+  ```
+- str.format() 그나마 쪼끔 씀
+  ```python
+  name = 'Kim'
+  score = 4.5
+  print('Hello, {}! 성적은 {}' .format(name,score))
+  #Hello, Kim! 성적은 4.5
+  ```
+- f-strings : python 3.6이상 **(가장 많이 사용)**
+  ```python
+  name = 'Kim'
+  score = 4.5
+
+  print(f'Hello,{name}! 성적은 {score}')
+  # Hello, Kim! 성적은 4.5
+
+  import datetime
+  today = datetime.datetime.now()
+  print(today) # 2022-07-08 16:04:15.200411
+
+  print(f'오늘은 {today:%y}년 {today:%m}월 {today:%d}일')
+  # 오늘은 22년 07월 08일
+
+  pi = 3.141592
+  print(f'원주율은 {pi:.3}입니다. 반지름이 2일 때 원의 넓이는 {pi*2*2}')
+  # 원주율은 3.14입니다. 반지름이 2일 때 원의 넓이는 12.566368
+  ```
