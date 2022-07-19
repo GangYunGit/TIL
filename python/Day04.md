@@ -64,7 +64,7 @@
 
 
 
-# 데일리 과제를 하며 배운점
+# 데일리 과제를 하며 얻은 것
 
 - 리스트를 sort명령으로 정렬할 때 `변수 = 리스트.sort()`로 쓰게 되면 변수에는 `None`값이 저장됨
   
@@ -80,4 +80,20 @@
     print(list_a_2)     # [1, 2, 3, 4, 5]
     ```
 
+- 컨테이너끼리 형 변환이 가능하다는 것을 잘 활용하자
 
+  - list -> set으로 형 변환하여 중복된 값 제거 -> list로 형 변환 `=> 중복이 제거된 리스트`
+  ```python
+  orders = 'a,a,b,c,d,e,c,b'
+  orders_list = orders.split(',')
+  menu_list = list(set(orders_list))
+  print(menu_list)    # ['b', 'd', 'e', 'a', 'c'] 순서는 계속 바뀜
+  ```
+
+- 컨테이너 내부에 컨테이너를 지속적으로 중첩 시킬 수 있다.
+  
+  ```python
+  air_info = [{'name' : 'A', 'capital' : True, 'air_status' : {'O2' : 3, 'CO2' : 2}}, {'name' : 'B', 'capital' : False, 'air_status' : {'O2' : 5, 'CO2' : 3}}]
+
+  # air_info라는 리스트 내부에 딕셔너리형으로 Value를 표시, 그 내부에 air_status라는 딕셔너리 자료형
+  ```

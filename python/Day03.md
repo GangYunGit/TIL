@@ -454,15 +454,15 @@
 
 - 여러 개의 값(데이터)을 담을 수 있는 것(객체)으로, 서로 다른 자료형을 저장할 수 있음
   
-  - 예시 : List
+  ![](Day03_imagefiles/2022-07-19-22-57-20-image.png)
 
 ### 컨테이터의 분류
 
 - 순서가 있는 데이터(Ordered) vs. 순서가 없는 데이터(Unordered)
 
 - 순서가 있다 != 정렬되어 있다
-
-![](Day03_imagefiles/2022-07-18-19-40-23-image.png)
+  
+  ![](Day03_imagefiles/2022-07-19-22-44-41-image.png)
 
 > 리스트
 
@@ -485,17 +485,18 @@
     list_c = ['Life', 'is', 'too', 'short']
     list_d = [1, 2, 3, 'python', ['리스트', '안에', '리스트']]
     ```
+  
   - 리스트 안에 리스트
-
+    
     ```python
     boxes = ['A', 'B', ['apple', 'banana', 'cherry']]
-
+    
     print(len(boxes)) # 리스트의 길이 = 3
-
+    
     print(boxes[2]) # 리스트의 2번째 인덱스에 해당하는 값 = ['','','']
-
+    
     print(boxes[2][-1]) # 2번째 인덱스인 리스트의 마지막 값 = 'cherry'
-
+    
     print(boxes[-1][1][0]) # 리스트 마지막 인덱스 두 번째 단어의 첫 단어 = b
     ```
 
@@ -506,7 +507,7 @@
 - 튜플은 수정 불가능한(immutable) 시퀀스로 인덱스로 접근 가능
 
 - 값에 대한 접근은 tuple[i]
-  
+
 ### 튜플 생성 주의사항
 
 - 단일 항목의 경우
@@ -521,13 +522,12 @@
     tuple_a = (1,)
     print(tuple_a) # (1,)
     print(type(tuple_a)) # <class 'tuple'>
-
+    
     tuple_b = (1, 2, 3,)
     print(tuple_b) # (1, 2, 3)
     print(type(tuple_b)) # <class 'tuple'>
     ```
 
-  
 ### 튜플 대입
 
 - 튜플 대입이란?
@@ -564,7 +564,7 @@
 - 기본형 : range(n)
   
   - 0부터 n-1까지의 숫자의 시퀀스
-
+    
     ```python
     # 0부터 특정 숫자까지
     print(list(range(3))) # [0, 1, 2]
@@ -573,7 +573,7 @@
 - 범위 지정 : range(n, m)
   
   - n부터 m-1까지의 숫자의 시퀀스
-
+    
     ```python
     # 숫자의 범위
     print(list(range(1, 5))) # [1, 2, 3, 4]
@@ -582,7 +582,7 @@
 - 범위 및 스텝 지정 : range(n, m, s)
   
   - n부터 m-1까지 s만큼 증가시키며 숫자의 시퀀스
-  
+    
     ```python
     # Step 활용
     print(list(range(1, 5, 2))) # [1, 3]
@@ -616,6 +616,7 @@
   # 문자열
   print('abcd'[2:4]) # cd
   ```
+  
   ```python
   # 리스트([1:4]에서 1은 포함 4는 미포함)
   print([1, 2, 3, 5][0:4:2]) # [1, 3]
@@ -647,27 +648,33 @@
   - 중복된 값이 존재하지 않음
 
 - 셋(Set) 생성
+  
   - 중괄호, 혹은 set()을 통해 생성
+    
     - ``빈 Set을 만들기 위해서는 set()을 반드시 활용``해야 함
+  
   - 순서가 없어 별도의 값에 접근할 수 없음
+    
     ```python
     # Set는 중복 값 제거
     print({1, 2, 3, 1, 2}) # {1, 2, 3}
     print(type({1, 2, 3})) # <class 'set'>
-
+    
     # 빈 중괄호는 Dictionary
     blank = {}
     print(type(blank)) # <class 'dict'>
     blank_set = set()
     print(type(blank_set)) # <class 'set'>
-
+    
     # Set는 순서가 없어 인덱스 접근 등 특정 값에 접근할 수 없음
     print({1, 2, 3}[0]) # TypeError : 'Set' object is not subscriptable
     ```
+  
   - 셋을 사용하면 다른 컨테이너에서 중복된 값을 쉽게 제거할 수 있지만, 제거 이후 순서가 무시되므로 `순서가 중요한 경우 사용할 수 없다.`
+    
     ```python
     my_list = ['서울', '서울', '대전', '광주', '서울', '대전', '부산', '부산']
-
+    
     # Set를 사용하는 순간 순서가 사라짐(실행 할 때마다 순서가 변경됨)
     print(set(my_list)) # {'광주', '서울', '부산', '대전'}
     ```
@@ -701,10 +708,10 @@
   ```python
   dict_a = {}
   print(type(dict_a)) # <class 'dict'>
-
+  
   dict_b = dict()
   print(type(dict_b)) # <class 'dict'>
-
+  
   dict_a = {'a': 'apple', 'b': 'banana', 'list':[1, 2, 3]}
   print(dict_a)
   print(dict_a['list']) # [1, 2, 3]
@@ -747,7 +754,7 @@ print(float('3/4') + 5.3) # ValueError : could not convert string to float: '3/4
 
 > 컨테이너 형 변환
 
-    ![](Day03_imagefiles/2022-07-18-18-50-34-image.png)
+    <img src="Day03_imagefiles/2022-07-19-22-58-01-image.png" title="" alt="" width="579">
 
 ---
 
