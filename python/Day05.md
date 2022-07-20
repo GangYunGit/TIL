@@ -325,7 +325,7 @@
   '''
   ```
 
-> enumerage 순회
+> enumerate 순회
 
 - enumerate()
   
@@ -336,7 +336,7 @@
   ```python
   members = ['민수', '영희', '철수']
   
-  for idx, number in enumerage(members):
+  for idx, number in enumerate(members):
           print(idx, number)
   
   '''
@@ -398,7 +398,7 @@
   ```
   
   ```python
-  cubic_list = [number ** 3 for number in range(1, 4)
+  cubic_list = [number ** 3 for number in range(1, 4)]
   print[cubic_list]
   
   # [1, 8, 27]
