@@ -84,10 +84,56 @@
 
 > 모듈
 
--
+- 외부의 함수를 끌어다 쓸 수 있게 해줌
 
 > 가상 환경
 
 - 버전이 다른 파이썬을 동시에 관리할 수 있게 만들어주는 환경
 
 - 가상 환경을 활성화하면 컴퓨터 전체에 설치된 파이썬의 관련 도구들을 할당하지 않고 프로젝트 내에서만 쓸 수 있는 도구들을 받아올 수 있다.
+
+# **hws, practice를 풀며 얻은 것**
+
+- 요구사항 중에 `'...를 ...하고 1-1(루프의 첫 부분)로 돌아간다'`와 비슷한 느낌의 표현이 있다면 `while True :`를 사용하여 루프를 작성하고, `break(루프 탈출`)와 `continue(건너 뛰고 다음 루프를 실행)`문을 적극 활용하자!
+
+- 함수 생성시 `parameter`를 `string(문자열)`로 받은 후 반복문에서 `for i in parameter`처럼 사용할 수도 있다.
+
+- if문에서 크기 비교시 `문자`로도 비교가 가능하다
+
+  ```python
+  def get_secret_number(some_word):
+    ascii_list_upper = {chr(number): number for number in range(65, 91)}
+    ascii_list_lower = {chr(number): number for number in range(97, 123)}
+    your_ascii = 0
+    for i in some_word:
+        if i >= 'A' and i <= 'Z':   # 문자로 비교!
+            your_ascii += ascii_list_upper[i]
+        elif i >= 'a' and i <= 'z':   # 문자로 비교!
+            your_ascii += ascii_list_lower[i]
+    return your_ascii
+  ```
+
+- 2차원 배열은 `중첩된 반복문`을 잘 활용해야 한다
+
+  ```python
+  def all_list_sum(some_list):
+      sum = 0
+      for i in range(len(some_list)):     
+          for j in range(len(some_list[i])):    
+              sum += some_list[i][j]
+      return sum
+  ```
+
+- Dictionary Comprehension 복습
+  
+  ```python
+  dict_comp = {key변수 : value변수 for i(반복 조건) if 조건 }
+  ```
+
+- 딕셔너리 자료형은 `for문`에 사용할 때 `key값`으로 접근하자
+
+- enumerate 메서드도 활용할 생각을 하자
+  
+  ```python
+  enumerate(객체) = (index, 객체)   # 인덱스와 객체를 튜플의 형태로 변환시켜줌
+  ```
