@@ -202,9 +202,9 @@
 
 > 기타 명령어
 
-- showmigrations : migrations 파일들이 migrate 되었는지 여부를 확인
+- `python manage.py showmigrations` : migrations 파일들이 migrate 되었는지 여부를 확인
 
-- sqlmigrate : 해당 migrations 파일이 SQL문으로 어떻게 해석될지 미리 알 수 있음
+- `python manage sqlmigrate app이름 migration파일번호네자리`: 해당 migrations 파일이 SQL문으로 어떻게 해석될지 미리 알 수 있음
 
 > Mdoel 변경사항 반영하기
 
@@ -226,7 +226,7 @@
 
 - DateField를 상속받는 클래스
 
-- 선택 인자
+- 선택 인자(`헷갈리지 말것!`)
   
   - `auto_now_add` : `최초 생성` 일자. 데이터가 실제로 만들어질 때 현재 날짜와 시간으로 자동 초기화되도록 함
   - `auto_now` : `최종 수정` 일자. 데이터가 수정될 때마다 현재 날짜와 시간으로 자동 갱신되도록 함.
