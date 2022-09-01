@@ -115,6 +115,8 @@
 > 개요
 
 - Django는 Model을 통해 데이터에 접근하고 조작
+  
+  <img title="" src="Day02_namspace_django_model%20_imagefiles/2022-09-01-09-13-09-image.png" alt="" data-align="center" width="371">
 
 - 사용하는 데이터들의 필수적인 필드들과 동작(메서드)들을 포함
 
@@ -144,7 +146,16 @@
   
   - Article에는 어떤 데이터 구조가 필요한지 정의
   
-  - 클래스 변수 title과 content는 DB 드를 나타낸다.
+  - 클래스 변수 title과 content는 DB 필드를 나타낸다.
+
+> Django Model Field
+
+- Django는 모델 필드를 통해 테이블 필드(Column)에 저장할 데이터 유형을 정의
+
+- 데이터 유형에 따라 다양한 모델 필드를 제공
+  
+  - DataField(), CharField(), IntegerField() 등
+  - 공식 문서 참고 : https://docs.djangoproject.com/en/3.2/ref/models/fields/ 
 
 - 클래스 변수(속성)명 = DB필드의 이름
 
@@ -172,7 +183,7 @@
 
 > 데이터베이스 스키마
 
-- 모델의 변경사항을 실제 데이터베이스에 반영하기 위한 과정이 필요
+- 모델의 변경사항을 실제 데이터베이스에 반영하기 위한 과정(`설계도` 제작)이 필요 => Migrations!
 
 ---
 
@@ -195,6 +206,8 @@
 - "파이썬으로 작성된 `설계도`"
 
 > migragte
+
+- `python manage.py migrate`
 
 - makemigrations로 만든 설계도를 실제 데이터베이스에 반영하는 과정(`db.sqlite3 파일에 반영`됨) => db.sqlite3을 열어보면 `앱 이름_클래스 명`에 해당하는 우리가 만든 스키마 정보가 들어가있음
 
@@ -240,6 +253,8 @@
 - SQL언어를 사용하지 않고도 데이터베이스를 조작할 수 있게 만들어줌
 
 - `생산성`을 위하여 ORM을 쓴다.
+
+- 하지만 ORM 만으로 완전한 서비스를 구현하기 어려운 경우가 있음.
 
 ---
 
@@ -295,6 +310,29 @@
 
 - 단, 데이터베이스가 단일한 객체를 반환할 때는 QuerySet이 아닌 모델(class)의 인스턴스로 반환됨
 
+> 기존의 `데이터에 필드를 추가`하는 방법
+
+- models.py에 변경사항이 생겼을 때
+  
+  <img title="" src="Day02_namspace_django_model%20_imagefiles/2022-09-01-09-23-44-image.png" alt="" data-align="center" width="397">
+
+- 이후 makemigrations를 진행하였을 때
+  
+  - Django 입장에서는 이미 존재하는 테이블에 새로운 Column이 추가되는 요구 사항을 받았는데, 이 컬럼들은 기본적으로 `빈 값으로 추가될 수 없음`
+  - 따라서 Django는 우리에게 추가되는 컬럼에 대한 기본 값 설정을 물어보는 과정을 진행
+  
+  <img src="Day02_namspace_django_model%20_imagefiles/2022-09-01-09-24-52-image.png" title="" alt="" data-align="center">
+
+- 1을 누르고 Enter 입력 후, 다음 화면에서 아무것도 입력하지 않고 Enter를 입력하면 Django에서 기본적으로 파이썬의 timezone 모듈의 now 메서드 반환 값을 기본값으로 매칭시켜줌
+  
+  ![](Day02_namspace_django_model%20_imagefiles/2022-09-01-09-28-00-image.png)
+
+- 새로운 설계도(migrations 경로 확인)를 확인해보자
+  
+  <img title="" src="Day02_namspace_django_model%20_imagefiles/2022-09-01-09-29-00-image.png" alt="" data-align="center" width="177">
+
+- 이후에 migrate 명령으로 DB와 동기화를 진행한다.
+
 ---
 
 ## QuerySet API 익히기
@@ -329,7 +367,7 @@
   
   - 생성된 데이터가 바로 반환되는 특징이 있다.
   
-  <img title="" src="Day02_imagefiles/2022-08-31-15-28-56-image.png" alt="" width="515" data-align="center">
+  <img title="" src="Day02_imagefiles/2022-08-31-15-28-56-image.png" alt="" width="361" data-align="center">
 
 > .save()
 
@@ -362,13 +400,15 @@
 
 - 위와 같은 특징 때문에 `Primary Key`와 같이 `고유성(uniqueness)을 보장하는 조회에서 사용`해야함!
   
-  <img title="" src="Day02_imagefiles/2022-08-31-15-30-59-image.png" alt="" width="529" data-align="center">
+  <img title="" src="Day02_imagefiles/2022-08-31-15-30-59-image.png" alt="" width="399" data-align="center">
 
 > filter()
 
 - 지정된 조회 매개 변수와 일치하는 객체를 포함하는 새 QuerySet을 반환
 
 - 조회된 `객체가 없거나 1개여도 QuerySet을 반환`
+  
+  <img src="Day02_namspace_django_model%20_imagefiles/2022-09-01-09-33-39-image.png" title="" alt="" data-align="center">
 
 > Field lookups
 
@@ -385,6 +425,8 @@
 2. article 인스턴스 객체의 인스턴스 변수 값을 새로운 값으로 할당
 
 3. save() 인스턴스 메서드를 호출하여 저장
+   
+   <img title="" src="Day02_namspace_django_model%20_imagefiles/2022-09-01-09-34-58-image.png" alt="" data-align="center" width="360">
 
 ## DELETE
 
@@ -393,6 +435,8 @@
 1. 삭제하고자 하는 article 인스턴스 객체를 조회 후 반환 값을 저장
 
 2. delete() 인스턴스 메서드 호출
+   
+   <img title="" src="Day02_namspace_django_model%20_imagefiles/2022-09-01-09-35-30-image.png" alt="" data-align="center" width="386">
 - Django는 pk가 1인 데이터를 지우고 그 자리에 다시 집어넣지 않는다. 불필요한 데이터니까 삭제했다고 인식하기 때문. 
 
 ---
