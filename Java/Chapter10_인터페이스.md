@@ -71,3 +71,22 @@
     // abstract 클래스로 표시
   }
   ```
+
+---
+
+## 인터페이스의 필요성
+
+- 구현의 강제로 표준화 처리 (abstract 메서드 사용)
+
+- 인터페이스를 통한 가접적인 클래스 사용으로 손쉬운 모듈 교체 지원
+
+- `서로 상속의 관계가 없는 클래스들에게` 인터페이스를 통한 관계 부여로 `다형성 확장`
+
+- 모듈 간 독립접 프로그래밍 가능 -> 개발 기간 단축
+
+  - "IStudentManager"라는 인터페이스를 사용하면 이후에 새로운 버전의 StudentManager를 만들었을 때 보다 쉽게 교체하여 사용할 수 있다.
+  
+  ![image](https://user-images.githubusercontent.com/109258306/189313933-8d86e55b-5d0b-442f-8522-63441030ba0e.png)
+
+  ![image](https://user-images.githubusercontent.com/109258306/189314424-8c2ac77e-adc1-43d4-8619-d272d260a8d6.png)
+
