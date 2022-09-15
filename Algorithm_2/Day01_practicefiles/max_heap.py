@@ -46,6 +46,10 @@ enq(7)
 enq(3)
 enq(4)
 enq(6)
+
+print(heap)
 while last:
     print(deq())
+
+
 
