@@ -37,24 +37,7 @@
 - 개발자들이 작성하는 일부 프로젝트에서는 django가 제공하는 built-in User model의 기본 인증 요구사항이 적절하지 않을 수 있음 ex) 회원가입 시 username 대신 email을 식별 값으로 사용하려는 경우
 
 - 그래서 Django는 현재 프로젝트에서 나타낼 User를 참조하는 `AUTH_USER_MODEL` 설정 값을 제공하여 `dafault user model을 재정의(override)할 수 있도록` 함
-
-> 대체하기
-
-- AbstractUser를 상속받는 커스텀 User 클래스 작성
-
-- 기존 User 클래스도 AbstractUser를 상속받기 때문에 커스텀 User 클래스도 완전히 같은 모습을 가지게 됨
   
-  <img title="" src="Day05_Authentication_imagefiles/2022-09-06-16-16-02-image.png" alt="" width="435" data-align="center">
-  
-  ```python
-  # accounts/models.py
-  
-  from django.contrib.auth.models import AbstractUser
-  
-  class User(AbstractUser):
-    pass
-  ```
-
 > 참고) User 모델 상속 관계
 
 - 실제 메인 코드는 `class AbstractUser`클래스에 대부분 구현되어 있음
@@ -75,7 +58,7 @@
 
 - `프로젝트가 진행되는 동안(모델을 만들고 마이그레이션 한 후) 변경 불가`
 
-- 프로젝트 시작 시 설정하기 위한 것이며, 참조하는 모델은 첫 번째 마이그레이션전에 확정지어야 함
+- 프로젝트 시작 시 설정하기 위한 것이며, `참조하는 모델은 첫 번째 마이그레이션전에 확정지어야 함`
 
 - 커스텀 User 모델은 `기본 User 모델과 동일하게 작동`하면서도 `필요한 경우 나중에 맞춤 설정할 수 있음!`
 
@@ -103,6 +86,45 @@
 
 - 기존 User 클래스도 AbstractUser를 상속받기 때문에 커스텀 User 클래스도 완전히 같은 모습을 가지게 됨
 
+> 대체하기
+
+1. AbstractUser를 상속받는 커스텀 User 클래스 작성
+
+   - 기존 User 클래스도 AbstractUser를 상속받기 때문에 커스텀 User 클래스도 완전히 같은 모습을 가지게 됨
+  
+  <img title="" src="Day05_Authentication_imagefiles/2022-09-06-16-16-02-image.png" alt="" width="435" data-align="center">
+  
+  ```python
+  # accounts/models.py
+  
+  from django.contrib.auth.models import AbstractUser
+  
+  class User(AbstractUser):
+    pass
+  ```
+
+2. Django 프로젝트에서 User를 나타내는데 사용하는 모델을 방금 생성한 커스텀 User모델로 지정
+
+  ```python
+  # settings.py
+  
+  AUTH_USER_MODEL = 'accounts.User'
+  ```
+
+3. admin.py에 커스텀 User 모델을 등록
+  - 기본 User 모델이 아니기 때문에 등록하지 않으면 admin site에 출력되지 않음
+
+  ```python
+  # accounts/admin.py
+
+  from django.contrib import admin
+  from django.contrib.auth.admin import UserAdmin
+  from .models import User
+
+
+  admin.site.register(User, UserAdmin)
+  ```
+
 > 참고) AbstractUser
 
 - 관리자 권한과 함께 완전한 기능을 가지고 있는 User model을 구현하는 추상 기본 클래스
@@ -111,7 +133,7 @@
   - 몇 가지 공통 정보를 여러 다른 모델에 넣을 때 사용하는 클래스
   - 데이터베이스 테이블을 만드는데 사용되지 않으며, 대신 다른 모델의 기본 클래스로 사용되는 경우 해당 필드가 하위 클래스의 필드에 추가됨
 
-> 데이터베이스 초기화
+> 참고) 데이터베이스 초기화하는 방법
 
 1. migrations 파일 삭제
   - `migrations 폴더 및 \__init__.py는 삭제하지 않는다`
