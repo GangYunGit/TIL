@@ -273,6 +273,9 @@
 
 > get_user()
 
+  ![image](https://user-images.githubusercontent.com/109258306/190891008-d470bbcf-f135-49e1-9b5a-f51a8da9e3db.png)
+
+
 - AuthenticationForm의 인스턴스 메서드
 
 - 유효성 검사를 통과했을 경우 로그인한 사용자 객체를 반환
@@ -383,7 +386,24 @@
 
 > UserCreationForm() 커스텀 하기
 
-- dasdasdasd
+```python
+# accounts/fomrs.py
+
+from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+
+
+class CustomUserCreationForm(UserCreationForm):
+    
+    class Meta(UserCreationForm.Meta):
+        model = get_user_model()
+
+
+class CustomUserChangeForm(UserChangeForm):
+
+    class Meta(UserChangeForm.Meta):
+        model = get_user_model()
+```
 
 > get_user_model()
 
@@ -412,6 +432,14 @@
 
 - 먼저 로그아웃 해버리면 해당 요청 객체 정보가 없어지기 때문에 탈퇴에 필요한 정보 또한 없어짐
 
+  ```python
+  # accounts/views.py
+
+  def delete(request):
+    request.user.delete()
+      auth_logout(request)
+  ```
+
 ---
 
 ## 회원정보 수정
@@ -435,11 +463,104 @@
 
 - 따라서 UserChangeForm을 상속받아 작성해 두었던 서브 클래스 CustomUserChangeForm에서 접근 가능한 필드를 조정해주어야 함
 
+> CustomUserChangeForm fields 재정의
+
+- User 모델의 fields가 어떤것이 있을까?
+
+  ```python
+  # accounts/fomrs.py
+
+  class CustomUserChangeForm(UserChangeForm):
+
+    class Meta(UserChangeForm.Meta):
+      model = get_user_model()
+      fields = ???  # 무엇이 올 수 있을까?
+  ```
+
+> User model 상속구조 살펴보기
+
+1. UserChangeForm 클래스 구조 확인
+
+- Meta 클래스를 보면 User라는 model을 참조하는 ModelForm이라는 것을 확인할 수 있음
+  ![image](https://user-images.githubusercontent.com/109258306/190891342-2bdc017a-b837-487b-aafb-28a9bff12096.png)
+
+2. User 클래스 구조 확인
+
+- 실제로 User 클래스는 Meta 클래스를 제외한 코드가 없고, AbstractUser 클래스를 상속만 받고 있음
+  ![image](https://user-images.githubusercontent.com/109258306/190891400-4fdf5a75-9ff3-4d45-a0cd-ef4c476cbf6e.png)
+
+3. AbstractUser 클래스 구조 확인
+
+- 클래스 변수명들을 확인해보면 회원수정 페이지에서 봤던 필드들과 일치하는 것을 볼 수 있음
+  ![image](https://user-images.githubusercontent.com/109258306/190891549-049c0482-5b4f-4a81-8aed-96b11d9f4cab.png)
+  ![image](https://user-images.githubusercontent.com/109258306/190891493-fd3e237e-9312-45cd-a4b0-7120a7967c87.png)
+
+> CustomerUserChangeForm fields 재정의
+
+- User model 상속구조에서 살펴본 바를 토대로 수정하고자 하는 필드를 작성 후 출력 변화 확인
+
+  ```python
+  class CustomUserChangeForm(UserChangeForm):
+
+    class Meta(UserChangeForm.Meta):
+      model = get_user_model()
+      fields = ('username', 'email', 'first_name', 'last_name',)
+  ```
+
+  ![image](https://user-images.githubusercontent.com/109258306/190891725-58df4fba-edf8-4451-9e27-549cd4708cf6.png)
+
+> views.py에 회원정보 수정 로직 장성
+
+- 작성 후 실제 회원정보가 수정되는지 확인
+
+  ```python
+  def update(request):
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('accounts:index')
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+
+    context = {
+        'form': form
+    }
+    return render(request, 'accounts/update.html', context)
+  ```
+
 ---
 
 ## 비밀번호 변경
 
-> asdasd
+> PasswordChangeForm
+
+- 사용자가 비밀번호를 변경할 수 있도록 하는 Form
+
+- 회원정보 수정 페이지에서 비밀번호 변경 form 링크로 들어가보자
+
+  ![image](https://user-images.githubusercontent.com/109258306/190892165-832fbdd7-ef32-4d7c-9d82-50355fa895fd.png)
+
+> 비밀번호 변경 로직 작성
+
+- 이 상태에서는 비밀번호를 변경 후 로그인 상태가 지속되지 못하는 문제가 발생함
+
+  ![image](https://user-images.githubusercontent.com/109258306/190892232-16ecf5ad-6747-43d6-866c-f7e2e06900ac.png)
+
+> 암호 변경 시 세션 무효화 방지하기
+
+- 비밀번호가 변경되면 기존 세션과 회원 인증번호가 일치하지 않게 되어버려 로그인 상태가 유지되지 못함
+
+- update_session_auth_hash() 메서드를 사용하여 해결 가능
+
+> update_session_auth_hash(`request`, `user`)
+
+- 현재 요청과 새 session data가 파생 될 업데이트 된 사용자 객체를 가져오고, session data를 적절하게 업데이트 해줌
+
+- 암호가 변경되어도 로그아웃 되지 않도록 새로운 password의 session data로 session을 업데이트
+
+  ![image](https://user-images.githubusercontent.com/109258306/190892590-55022922-6ed5-43f0-aa4c-0d959e431027.png)
+
 
 ---
 
@@ -466,4 +587,41 @@
 
 - `권한(permission)과는 관련이 없으며`, `사용자가 활성화 상태` 이거나 `유효한 세션을 가지고 있는지`도 `확인하지 않음`
 
+> is_authenticated 적용하기
 
+- base.html에 로그인과 비로그인 상태에서 출력되는 링크를 다르게 설정하기
+
+  ![image](https://user-images.githubusercontent.com/109258306/190892724-c44f9182-a0e4-4071-bc7d-37cf494f00a5.png)
+
+
+> login_required 적용하기
+
+- 로그인 상태에서만 글을 작성/수정/삭제 할 수 있도록 변경
+
+  ![image](https://user-images.githubusercontent.com/109258306/190892799-3cab1d6b-cf57-4f8c-8184-615659f1994b.png)
+
+> 적용 확인하기
+
+- /articles/create로 강제 접속 시도시 로그인 페이지로 리다이렉트 됨
+- url 확인 : /accounts/login/?next=/articles/create/
+
+  ![image](https://user-images.githubusercontent.com/109258306/190893011-75978e1b-4cf7-4e78-86fc-7ddb1ccef33b.png)
+
+- 인증 성공 시 사용자가 redirect 되어야하는 경로는 "next"라는 쿼리 문자열 매개변수에 저장됨
+  - /accounts/login/`?next=/articles/create/`
+
+> "next" querty string parameter
+
+- 로그인이 정상적으로 진행되면 이전에 요청했던 주소로 redirect 하기 위해 Django가 제공해주는 쿼리 스트링 파라미터
+
+- 해당 값을 처리할지 말지는 자유이며, 별도로 처리하지 않으면 view에 설정한 redirect 경로로 이동하게 된다.
+
+> 비교 연산자의 단축평가를 이용하여 "next" querty string parameter 처리하기
+
+  ![image](https://user-images.githubusercontent.com/109258306/190893117-8197dea7-455a-4849-9647-46ac53c36de7.png)
+
+> 주의 사항
+
+- 만약 login 템플릿에 form action이 작성되어 있다면 동작하지 않음.
+
+- 해당 action 주소 next 파라미터가 작성 되어있는 현재 url이 아닌 /accounts/login으로 요청을 보내기 때문
