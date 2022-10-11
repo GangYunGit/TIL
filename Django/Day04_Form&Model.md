@@ -30,6 +30,35 @@
 
 - 상속을 통해 선언 (forms 라이브러리의 Form 클래스를 상속)
 
+- 앱 폴더에 forms.py를 생성 후 ArticleForm Class 선언
+
+  ```python
+  from django import forms
+
+
+  class ArticleForm(forms.Form):
+    title = forms.CharField(max_length=10)
+    content = fomrs.ChaField()
+  ```
+
+- form에는 model field와 달리 TextField가 존재하지 않음
+
+- `Forms Class를 forms.py를 새로 만들어 작성하는 것은 규약은 아니`며 models.py에 작성해도 되지만, 더 나은 유지보수의 관점 그리고 관행적으로 이렇게 하는 것을 권장한다.
+
+- "new"함수 업데이트
+
+  ```python
+  from .forms import ArticleForm
+
+  
+  def new(request):
+    form = ArticleForm()
+    context = {
+      'form': form,
+    }
+    return render(request, 'articles/new.html', context)
+  ```
+
 > Form rendering options
 
 - \<label> & \<input> 쌍에 대한 3가지 출력 옵션
@@ -74,6 +103,23 @@
 - Django의 HTML input element의 표현을 담당
 
 - `단순히 HTML 렌더링을 처리하는 것`이며 **유효성 검증과 아무런 관계가 없음**
+
+> 예시) Textarea 위젯 적용하기
+
+- forms.py에 widget을 추가
+
+  ```python
+  # articles/forms/py
+
+  class ArticleForm(forms.Form):
+    title = forms.CharField(max_length=10)
+    content = fomrs.CharField(widget=forms.Textarea)
+  ```
+
+- content에 Textarea 속성이 적용된 것을 확인
+
+  ![image](https://user-images.githubusercontent.com/109258306/190896826-6f73c95a-5f2f-48a5-a86f-11e7f59a38ea.png)
+
 
 > 다양한 built-in 위젯
 
