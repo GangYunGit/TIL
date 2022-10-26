@@ -18,6 +18,27 @@
     const btn = document.querySelector('button')
 
     btn.addEventListener('click', function () {
+      // 권장 표기 방식
+      axios({
+        // Axios CDN을 참고해서 작성해보기!
+        method: 'get',
+        url: catImageSearchURL,
+      })
+        .then((response) => {
+          console.log(response.data[0].url)
+          const imgElem = document.createElement('img')
+          return imgElem
+        })
+        .then((imgElem) => {
+          imgElem.setAttribute('src', response.data[0].url)
+          document.body.appendChild(imgElem)
+        })
+        .catch((error) => {
+          console.log('실패했다옹')
+        })
+      console.log('야옹야옹')
+
+      // 일반 표기 형식
       axios.get(catImageSearchURL)
         .then((response) => {
           // console.log(response.data[0].url)

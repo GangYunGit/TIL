@@ -231,6 +231,7 @@ urlpatterns = [
   - callback은 이전 작업의 실패 객체를 인자로 전달 받음
 
 - then과 catch 보두 항상 promise 객체를 반환. 즉, 계속해서 chaining을 할 수 있음
+  - 단, then을 chaining할 때에는 `then의 끝에 항상 return`이 있어야함!
 
 - `axios로 처리한 비동기 로직이 항상 promise 객체를 반환` 그래서 then을 계속 이어나가면서 작성이 가능함
 
@@ -275,4 +276,6 @@ work1()
     // error handling
   })
 ```
+
+
 
