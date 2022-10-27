@@ -61,3 +61,18 @@
 | c:url       | URL 작성                                                       |
 | c:out       | 출력                                                           |
 | c:catch     | 예외처리                                                       |
+
+> c:set 태그
+
+- 기본형식 : \<c:set var="변수 이름" value="변수 값" scope="page|request|session|application"\/>
+
+| 속성   | 설명                                              |
+| ------ | ------------------------------------------------- |
+| var    | 변수이름 지정                                     |
+| value  | 변수 값 지정                                      |
+| scope  | 변수의 유효영역 지정, 지정하지 않으면 기본값 page |
+| target | 속성값을 지정할 java bean 객체                    |
+
+- ex) request영역에 name속성을 지정하고 'ssafy'라는 문자열을 저장
+  - \<c:set var="name" value="ssafy" scope="request"\/>
+  - request.setAttribute("name", "ssafy") 와 동일함
