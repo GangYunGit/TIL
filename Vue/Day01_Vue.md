@@ -3,7 +3,7 @@
 # Front-end Development
 
 > Front-end Framework
-
+ 
 - Front-end(FE) 개발이란?
   - 사용자에게 보여주는 화면 만들기
 
@@ -61,9 +61,9 @@
 
 > CSR의 단점
 
-- 첫 구동 시 필요한 데이터가 많으면 많을수록 최초 작동까지 오랜 시간이 소요
+- `첫 구동 시 필요한 데이터가 많으면` 많을수록 `최초 작동까지 오랜 시간`이 소요
 
-- Naver, Netflix, Disny+ 등 모바일에 설치된 Web-App을 실행하게 되면 잠깐의 로딩 시간이 필요
+- ex) Naver, Netflix, Disny+ 등 모바일에 설치된 Web-App을 실행하게 되면 잠깐의 로딩 시간이 필요
 
 - 검색 엔진 최적화(SEO, Search Engine Optimization)가 어려움
   - 서버가 제공하는 것은 비어있는 HTML
@@ -78,7 +78,7 @@
 - 검색 = 각 사이트가 운용하는 검색 엔진에 의해 이루어지는 작업
 
 - 검색 엔진 = 웹 상에 존재하는 가능한 모든 정보들을 긁어 모으는 방식으로 동작
-  - 정보의 대상은 주로 HTML에 작성된 내용
+  - `정보의 대상`은 주로 `HTML`에 작성된 내용
   - JavaScript가 실행된 이후의 결과를 확인하는 과정이 없음
 
 - 최근에는 SPA, 즉 CSR로 구성된 서비스의 비중이 증가
@@ -91,6 +91,9 @@
 - 내 서비스에 적합한 렌더링 방식을 적절히 활용하자.
   
 - SAP 서비스에서도 SSR을 지원하는 Framework도 발전하고 있음
+  - Vue의 Nuxt.js
+  - React의 Next.js
+  - Angular Universal 등
 
 > 여러가지 Frone-end Framework
 
@@ -109,7 +112,7 @@
 
 > Vue의 구조
 
-```vue
+```html
 <template>
   <!-- HTML -->
   <div>
@@ -159,7 +162,7 @@
 
 - 안정적인 측면에서는 아직 Vue2가 우세
 
-- 주의! Vue3 한글화 문서는 되도록 읽지 말 것. 아직 누락된 내용이 많음
+- 주의! `Vue3 한글화 문서`는 `되도록 읽지 말 것`. 아직 누락된 내용이 많음
 
 ---
 
@@ -169,7 +172,7 @@
 
 - 소프트웨어 아키텍처 패턴의 일종
 
-- 마크업 언어로 구현하는 그래픽 사용자 인터페이스(view)의 개발을 Back-end(model)로부터 분리시켜 view가 어느 특정한 모델 플랫폼에 종속되지 않도록 함
+- 마크업 언어로 구현하는 `그래픽 사용자 인터페이스(view)`의 개발을 `Back-end(model)`로부터 분리시켜 view가 어느 특정한 모델 플랫폼에 종속되지 않도록 함
 
 ![image](https://user-images.githubusercontent.com/109258306/198940336-04cafe0c-1877-436c-be13-088f5a61669f.png)
 
@@ -193,9 +196,27 @@
 
 > Vue instance
 
-- Vue instance === 1개의 객체
+![image](https://user-images.githubusercontent.com/109258306/199006436-32681b16-0826-4f0a-9951-9af3aac88e2e.png)
+
+- Vue instance 자체가 하나의 객체이다.
 
 - 아주 많은 속성과 메서드를 이미 가지고 있고, 이러한 기능들을 사용하는 것
+
+> 참고) 생성자 함수
+
+- 동일한 구조의 객체를 여러 개 만들고 싶다면?
+
+- `new` 연산자로 사용하는 함수
+
+```js
+function Member(name, age, sId) {
+  this.name = name
+  this.age = age
+  this.sId = sId
+}
+
+const member3 = new Member('isaac', 21, 2022654321)
+```
 
 > el (element)
 
@@ -203,8 +224,8 @@
   - View와 Model을 연결하는 역할
   - HTML id 혹은 class와 마운트 가능
 
-- Vue instance와 연결되지 않은 DOM 외부는 Vue의 영향을 받지 않음
-  - Vue 속성 및 메서드 사용 불가
+- `Vue instance와 연결되지 않은` DOM 외부는 Vue의 영향을 받지 않음
+  - `Vue 속성 및 메서드 사용 불가`
 
 > data
 
@@ -212,9 +233,26 @@
 
 - 데이터 객체는 반드시 기본 객체 `{}(Object)`여야 함
 
+```html
+<div id='app'>
+  {{ message }}
+</div>
+
+<!-- Vue CDN -->
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello, Vue!'
+    },
+  })
+</script>
+```
+
 - 객체 내부의 아이템들은 `value`로 `모든 타입의 객체를 가질 수 있음`
 
 - 정의된 속성은 `interpolation{{}}`을 통해 view에 렌더링 가능함
+
 
 > methods
 
@@ -239,7 +277,23 @@
 - methods 객체 정의
   - 객체 내 print method 정의
   - print method 실행 시 Vue instance의 data내 messsage 출력
-  - 콘솔창에서 app.print() 실행
+  - 콘솔창에서 app.print()을 실행하여 결과 확인
+
+```html
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello, Vue!'
+    },
+    methods: {
+      ...
+      bye: function () {
+        this.message = 'Bye, Vue!'
+      }, 
+    }
+  })
+```
 
 - method를 호출하여 data 변경 가능
   - 객체 내 bye method 정의
@@ -270,7 +324,52 @@
   - HTML 기반 template syntax - `HTML 코드에 직접 작성할 수 있는 문법` 제공
   - 선언적으로 바인딩 - `Vue instance와 DOM을 연결`
 
+> Template Interpolation
+
+```html
+<div id="app">
+  <p>메시지: {{ msg }}</p>
+  <p>HTML 메시지 : {{ rawHTML }}</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      msg: 'Text interpolation',
+      rawHTML: '<span style="color:red"> 빨간 글씨</span>'
+    }
+  })
+</script>
+```
+
+- 가장 기본적인 바인딩(연결) 방법, `HTML을 일반 텍스트로 표현`
+
+- 중괄호 2개로 표기
+
+- DTL과 동일한 형태
+
 > RAW HTML
+
+```html
+<div id="app">
+  <p>HTML 메시지 : 
+    <span v-html="rawHTML"></span>
+  </p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      msg: 'Text interpolation',
+      rawHTML: '<span style="color:red"> 빨간 글씨</span>'
+    }
+  })
+</script>
+```
 
 - v-html directive를 사용하여 data와 바인딩
 
@@ -287,6 +386,7 @@
   <p>{{ msg.split('').reverse().join('') }}</p>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 <script>
   const app = new Vue({
     el: '#app',
@@ -318,6 +418,24 @@
 
 > v-text
 
+```html
+<div id="app2">
+  <p v-text="message"></p>
+  <!-- 같음 -->
+  <p>{{ message }}</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app2 = new Vue({
+    el: '#app2',
+    data: {
+      message: 'Hello!',
+    }
+  })
+</script>
+```
+
 - Template Interpolation과 함께 가장 기본적인 바인딩 방법
 
 - `{{  }}`와 동일한 역할. 정확히 동일한 것은 아님.
@@ -330,6 +448,22 @@
 
 > v-show
 
+```html
+<div id="app3">
+  <p v-show="isActive">보이니? 안보이니?</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app3',
+    data: {
+      isActive: false
+    }
+  })
+</script>
+```
+
 - 표현식에 작성된 값에 따라 element를 보여 줄 것인지 결정
   - boolean 값이 변경 될 때마다 반응
 
@@ -337,7 +471,26 @@
 
 - 요소 자체는 항상 DOM에 렌더링 됨
 
+- 값이 false로 설정되었다고 해도 `화면에서만 사라졌을 뿐, DOM에는 존재`한다.
+  - display 속성이 변경된 것 뿐
+
 > v-if
+
+```html
+<div id="app3">
+  <p v-if="isActive">안보이니? 보이니?</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app3 = new Vue({
+    el: '#app3',
+    data: {
+      isActive: false
+    }
+  })
+</script>
+```
 
 - v-show와 사용 방법은 동일
 
@@ -360,6 +513,24 @@
 - v-if를 더 자주 보게 될 것임
 
 > v-for
+
+```html
+<div id="app">
+  <div v-for="(char, index) in myStr" :key="index">
+    <p>{{ index }}번째 문자열 {{ char }}</p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      myStr: 'Hello, World!',
+    }
+  })
+</script>
+```
 
 - for .. in .. 형식으로 작성
 
@@ -396,6 +567,23 @@
 
 > v-on
 
+```html
+<div id="app">
+  <button v-on:click="number++">increase Number</button>
+  <p>{{ number }}</p>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      number: 0,
+    },
+  })
+</script>
+```
+
 - `:` 을 통해 전달받은 인자를 확인
 
 - 값으로 JS 표현식 작성
@@ -415,6 +603,23 @@
 
 > v-bind
 
+```html
+<div id="app2">
+  <!-- v-bind의 속성값들은 script 코드상에서와 같이 모두 *!변수!*임 -->
+  <a v-bind:href="url">Go To GOOGLE</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app2',
+    data: {
+      url: 'https://www.google.com/',
+    },
+  })
+</script>
+```
+
 - HTML 기본 속성에 Vue data를 연결
 
 - class의 경우 다양한 형태로 연결 가능
@@ -432,6 +637,24 @@
 - `:` shortcut 제공
 
 > v-model
+
+```html
+<div id="app">
+  <h3>{{ myMessage2 }}</h3>
+  <input v-model="myMessage2" type="text">
+  <hr>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app2',
+    data: {
+      myMessage2: '',
+    },
+  })
+</script>
+```
 
 - Vue instance와 DOM의 `양방향 바인딩`
 
@@ -484,21 +707,26 @@
 - Array, Object의 내부 요소 변경 감지를 위해서는 `deep 속성` 추가가 필요
 
 ```html
-watch: {
-        number: function (val, oldVal) {
-          console.log(val, oldVal)
-        },
+<div id="app">
+  <h3>Increase number</h3>
+  <p>{{ number }}</p>
+  <button @click="number++">+</button>
+</div>
 
-        name: {
-          handler: 'nameChange'
-        },
-
-        myObj: {
-          handler: function (val) {
-            console.log(val)
-          },
-          deep: true
-        },
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data: {
+      number: 0,
+    },
+    watch: {
+      number: function (val, oldVal) {
+        console.log(val, oldVal)
+      },
+    }
+  })
+</script>
 ```
 
 > filters
