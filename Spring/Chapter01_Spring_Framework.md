@@ -31,11 +31,30 @@
 
 - ClassA 객체가 어떤 일을 처리하기 위해서 ClassB의 객체의 도움을 받아야만 일을 처리할 수 있다면 `'ClassA는 ClassB에 의존한다.'`라고 표현
 
-```java
-public class Store {
-    private Item obj = new ItemImp();
-    public void doSomething() {
-        obj.func();
-    }
-}
-```
+![image](https://user-images.githubusercontent.com/109258306/200158423-8191ddd5-d2c5-484d-ac4b-650cda3cdfe5.png)
+
+> 의존성 주입(Dependency Injection)
+
+- 사용 객체에 대하여 직접 의존성을 생성하는 것보다는 생성자, 팩토리 메서드, 세터 등을 이용하여 종속성을 정의하는 방식
+
+![image](https://user-images.githubusercontent.com/109258306/200158480-245ebfae-2aa4-43f0-af96-da216957fe12.png)
+
+- 종속성에 대한 인스턴스화를 직접 제어하지 않고 이를 역전 시키기 때문에 이러한 프로세스를 제어 역전(Inversion of Control)이라 한다.
+
+---
+
+## Spring 라이브러리 세팅하기
+
+> Maiven을 통해서 프로젝트에 Spring 라이브러리 세팅
+
+- mvnrepository에서 Spring Context(5.3.18)를 복사
+
+![image](https://user-images.githubusercontent.com/109258306/200160639-ca2245de-4478-4a67-af14-dff08a317acb.png)
+
+- pom.xml에 \<dependencies>태그를 생성하여 붙여넣기
+
+![image](https://user-images.githubusercontent.com/109258306/200160774-e3fe1b33-c4c9-48b0-af6b-fdaf51cf7070.png)
+
+- pom.xml 저장 후 'Maven Dependencies' 라이브러리가 생기는지 확인
+
+![image](https://user-images.githubusercontent.com/109258306/200160840-add3219d-850d-4def-910c-99721d0455cf.png)
