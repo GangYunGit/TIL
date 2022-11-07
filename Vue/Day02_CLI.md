@@ -408,7 +408,7 @@ export default {
 
 ![image](https://user-images.githubusercontent.com/109258306/199417553-c4b6d9ad-80ce-4ee6-a47e-2dbecb60c99f.png)
 
-> emit with data 흐름ㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑㅑ
+> emit with data 흐름
 
 1. 자식 컴포넌트에 있는 버튼 클릭 이벤트를 청취하여 연결된 핸들러 함수(ChildToParent) 호출
 2. 호출된 함수에서 $emit을 통해 부모 컴포넌트에 이벤트(child-to-parent)를 발생 => 이벤트 데이터에 (child data)를 함께 전달
