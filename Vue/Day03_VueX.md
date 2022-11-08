@@ -56,9 +56,9 @@
 > 프로젝트 with vuex
 
 ```
-$ vue create vuex=app   // Vue 프로젝트 생성
+$ vue create vuex-app   // Vue 프로젝트 생성
 
-$ cv vuex-app           // 디렉토리 이름
+$ cd vuex-app           // 디렉토리 이름
 
 $ vue add vuex          // Vue CLI를 통해 vuex plugin을 적용
 ```
