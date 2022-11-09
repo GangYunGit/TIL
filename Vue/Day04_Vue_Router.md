@@ -252,6 +252,8 @@ $ vue add router
 - router/index.js에 `router.beforeEach()`를 사용하여 설정
 
 - 콜백 함수의 값으로 3개의 안지랄 받음
+  - 콜백 함수 내부에서 `반드시 한 번만 호출되어야 함`
+  - 기본적으로 to에 해당하는 URL로 이동
   - **to** : 이동할 URL 정보가 담긴 Route 객체
   - **from** : 현재 URL 정보가 담긴 Route 객체
   - **next** : 지정한 URL로 이동하기 위해 호출하는 함수
@@ -262,6 +264,81 @@ $ vue add router
 - 변경된 URL로 라우팅하기 위해서는 next()를 호출해줘야 함
   - `next()가 호출되기 전까지 화면이 전환되지 않음`
 
+> Global Before Guard
+
+```js
+// router/index.js
+
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+...
+
+Vue.use(VueRouter)
+
+const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: HomeView
+  },
+  ...
+]
+
+...
+// *************************************
+router.beforeEach((to, from, next) => {
+    console.log('to', to)
+    console.log('from', from)
+    console.log('next', next)
+    // next()  =>  호출되어야 화면이 전환!!
+})
+// *************************************
+
+export default router
+```
+
+![image](https://user-images.githubusercontent.com/109258306/200858771-604e57fc-a1ac-4e9e-a1c1-05d7b5b39107.png)
+
+
+- '/home'으로 이동하더라도 라우팅이 되지 않고 로그만 출력됨
+  
+- `next()`가 호출되지 않으면 화면이 전환되지 않는다!
+
+> Login 여부에 따른 라우팅 처리
+
+```js
+// router/index.js
+
+router.beforeEach((to, from, next) => {
+  // 로그인 여부
+  const isLoggedIn = false
+
+  // 로그인이 필요한 페이지
+  const authPages = ['hello']
+  // const isAuthRequired = authPages.includes(to.name)
+  const isAuthRequired = !authPages.includes(to.name)
+
+  if (isAuthRequired && !isLoggedIn) {
+    console.log('Login으로 이동!')
+    next({ name: 'login' })
+  } else {
+    console.log('to로 이동!')
+    next()
+  }
+})
+```
+
+- isAuthRequired 값에 따라 로그인이 필요한 페이지 인지 판별
+  - 로그인이 되어있지 않으면 Login 페이지로 이동
+  - 로그인이 되어있다면 기존 루트로 이동
+  - next()인자가 없을 경우 to로 이동
+
+> 만약 view들이 여러개라면 모두 추가해주어야 하나?
+
+![image](https://user-images.githubusercontent.com/109258306/200860100-f125c180-b3b3-4681-9fbd-512be18103ed.png)
+
+- 반대로 Login하지 않아도 되는 페이지들을 모아 놓을 수도 있음
+
 ---
 
 ## 라우터 가드
@@ -270,12 +347,41 @@ $ vue add router
 
 - 전체 route가 아닌 특정 route에 대해서만 가드를 설정하고 싶을 때 사용
 
-- beforEnter()
+- `beforEnter()`
   - route에 진빙했을 때 실행
   - 라우터를 등록한 위치에 추가
   - 단 매개변수, 쿼리, 해시 값이 변경될 때는 실행되지 않고 다른 경로에서 탐색할 때만 실행됨
   - 콜백함수는 to, from, next를 인자로 받음
 
+> 로그인 여부에 따른 라우팅 처리
+
+```js
+// router/index.js
+
+Vue.use(VueRouter)
+
+// 로그인 여부에 대한 임시 변수 생성
+const isLoggedIn = true
+
+const routes = [
+  ...
+  {
+    path: '/login',
+    name: 'login',
+    component: LoginView,
+    beforeEnter(to, from, next) {
+
+      if (isLoggedIn === true) {   // 로그인 되어있는 경우 home으로 이동
+        console.log('이미 로그인 되어있음')
+        next({ name: 'home' })
+      } else {             // 로그인이 되어있지 않은 경우 login으로 이동
+        next()
+      }
+    }
+  },
+ ...
+]
+```
 ---
 
 ## 컴포넌트 가드
@@ -289,6 +395,8 @@ $ vue add router
 - `beforeRouteUpdate()`를 사용해서 처리
   - userName을 이동할 params에 있는 userName으로 재할당
 
+![image](https://user-images.githubusercontent.com/109258306/200861280-e3a331b4-2e3f-48bb-b641-80ff5feca3e9.png)
+
 ---
 
 ## 404 Not Found
@@ -297,10 +405,62 @@ $ vue add router
 
 - 사용자가 요청한 리소스가 존재하지 않을 때 응답
 
+```html
+<!-- views/NotFound404.vue -->
+
+<template>
+  <div>
+    <h1>404 Not Found</h1>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "NotFound404",
+};
+</script>
+
+<style>
+</style>
+```
+
+```js
+// router/index.js
+
+import NotFound404 from '@/views/NotFound404View'
+
+const routes = [
+  ...
+  {
+    path: '/404',
+    name: 'NotFound404',
+    component: NotFound404View,
+  }
+]
+```
+
+> 요청한 리소스가 존재하지 않는 경우
+
+- 모든 경로에 대해서 404 page로 redirect 시키기
+  - 기존에 명시한 경로가 아닌 모든 경로가 404 page로 redirect
+  - 이 때, `routes의 최하단부에 작성`해야 함
+
+```js
+// router/index.js
+
+const routes = [
+  ...
+  {
+    path: '*',
+    redirect: '/404',
+  }
+]  
+```
+
 > 형식은 유효하지만 특정 리소스를 찾을 수 없는 경우
 
-- ex) Django에게 articles/1/로 요청을 보냈지만, 1번 게시글이 삭제된 상태
-  - 이때는 path: '*'를 만나 404page가 렌더링 되는 것이 아니라 기존에 명시간 articles/:id/에 대한 components가 렌더링됨
+- ex) Django에게 `articles/1/`로 요청을 보냈지만, 1번 게시글이 삭제된 상태
+  - 이때는 path: '*'를 만나 404page가 렌더링 되는 것이 아니라 기존에 명시한 `articles/:id/`에 대한 components가 렌더링됨
   - 하지만 데이터가 존재하지 않기 때문에 정상적으로 렌더링이 되지 않음
 
 - 해결책
