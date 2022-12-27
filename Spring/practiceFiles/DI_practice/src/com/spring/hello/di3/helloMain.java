@@ -4,7 +4,7 @@ public class helloMain {
 	public static void main(String[] args) {
 
 		HelloMessage hello = HelloMessageFactory.getHelloMessage("kor");
-		String greet = hello.hello("¿Ã∞≠¿±");
+		String greet = hello.hello("Ïù¥Í∞ïÏú§");
 		System.out.println(greet);
 	}
 }
