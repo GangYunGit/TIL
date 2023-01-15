@@ -1,0 +1,154 @@
+# Hooks
+
+## Hooks란?
+
+- 리액트 v16.8에 새로 도입된 기능으로 함수 컴포넌트에서도 상태를 관리할 수 있는 useState와 같은 기능을 제공하여 기존의 함수 컴포넌트에서 할 수 없었던 다양한 작업을 할 수 있게 해준다.
+
+## useState
+
+- useState는 가장 기본적인 Hook이며, 함수 컴포넌트에서도 `가변적인 상태`를 지닐 수 있게 해줌
+
+- useState 함수의 파라미터에는 상태의 기본값을 넣어준다.
+
+```js
+// Counter.js
+
+import { useState } from 'react';
+
+const Counter = () => {
+  const [value, setValue] = useState(0);
+
+  return (
+    <div>
+      <p>
+        현재 카운터의 값은 <b>{value}</b>입니다.
+      </p>
+      <button onClick={() => setValue(value + 1)}>+ 1</button>
+      <button onClick={() => setValue(value - 1)}>- 1</button>
+    </div>
+  )
+}
+
+export default Counter
+```
+
+```js
+// App.js
+
+import Counter from "./Counter";
+
+const App = () => {
+  return <Counter />
+}
+
+export default App
+```
+
+## useEffect
+
+- `React 컴포넌트가 렌더링될 때마다 특정 작업을 수행`하도록 설정할 수 있는 Hook.
+
+> useEffect 사용해보기
+
+```js
+// Info.js
+
+import { useState, useEffect } from "react";
+
+const Info = () => {
+  const [name, setName] = useState('');
+  const [nickname, setNickname] = useState('');
+  useEffect(() => {
+    console.log('렌더링 완료');
+    console.log({
+      name,
+      nickname
+    });
+  });
+
+  const onChangeName = e => {
+    setName(e.target.value);
+  }
+
+  const onChangeNickname = e => {
+    setNickname(e.target.value);
+  }
+
+  return (
+    <div>
+      <div>
+        <input value={name} onChange={onChangeName} />
+        <input value={nickname} onChange={onChangeNickname} />
+      </div>
+      <div>
+        <div>
+          <b>이름: </b> {name}
+        </div>
+        <div>
+          <b>닉네임: </b> {nickname}
+        </div>
+      </div>
+    </div>
+  )
+};
+
+export default Info
+```
+
+```js
+// App.js
+
+import Info from "./Info"
+
+const App = () => {
+  return <Info />
+}
+
+export default App
+```
+
+![image](https://user-images.githubusercontent.com/109258306/212544724-dbbe98c1-7710-40b1-b931-771afb92344d.png)
+
+> 마운트 될 때에만 실행하고 싶을 때
+
+- useEffect함수의 두 번째 파라미터로 빈 배열 `[]`을 넣어주면 된다.
+
+```js
+// Info.js
+
+useEffect(() => {
+  console.log('마운트될 때만 실행');
+}, [])
+```
+
+> 특정 값이 업데이트될 때만 실행하고 싶을 때
+
+- useEffect함수의 두 번째 파라미터로 전달되는 배열 안에 검사하고 싶은 값을 넣으면 된다.
+
+- 배열 안에는 useState를 통해 관리하고 있는 상태를 넣어도 되고, props로 전달받은 값을 넣어도 된다.
+
+```js
+// Info.js
+
+useEffect(() => {
+  console.log(name);
+}, [name])
+```
+
+> 뒷정리(cleanup)
+
+- 컴포넌트가 언마운트 되기 전이나 업데이트되기 직전에 수행할 작업이 있다면 useEffect에서 `뒷정리(cleanup) 함수를 반환`해주어야 한다.
+
+```js
+// Info.js
+useEffect(() => {
+  console.log('effect');
+  console.log(name);
+  return () => {
+    console.log('cleanup');
+    console.log(name);
+  }
+}, [name]);
+```
+
+![image](https://user-images.githubusercontent.com/109258306/212545417-7a4bd75c-95a0-438c-bf57-d7d3e6da3ec3.png)
