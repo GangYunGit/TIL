@@ -152,3 +152,135 @@ useEffect(() => {
 ```
 
 ![image](https://user-images.githubusercontent.com/109258306/212545417-7a4bd75c-95a0-438c-bf57-d7d3e6da3ec3.png)
+
+## useContext
+
+- 기존의 React에 존재하는 Context를 더 편하게 사용가능!
+
+> Context 란?
+ 
+- `데이터 공유가 필요할 때 props를 쓸 필요 없이` context를 이용한다.
+
+- 일반적인 React 어플리케이션에서 데이터는 props를 통해 부모 -> 자식에게 전달
+
+- 어플리케이션 안의 여러 컴포넌트들에게 props를 전달해줘야 하는 경우 context를 이용하면 명시적으로 props를 넘겨주지 않아도 값을 공유할 수 있게 해줌
+
+> context API를 사용하기 위해 알아야 할 3가지 개념
+  
+- createContext : context 객체를 생성
+
+- Provider : 생성한 context를 하위 컴포넌트에게 전달
+
+- Consumer : context의 변화를 감시하는 컴포넌트
+
+> useContext 예시
+
+```js
+// ContextSample.js
+
+import { AppContext } from "./App";
+
+const ContextSample = () => {
+  return (
+    <AppContext.Consumer>
+      {(user) => (
+        <>
+          <h3>Appcontext에 존재하는 name : {user.name}</h3>
+          <h3>Appcontext에 존재하는 job : {user.job}</h3>
+        </>
+      )}
+    </AppContext.Consumer>
+  )
+};
+
+export default ContextSample;
+```
+
+```js
+// App.js
+
+import React, { createContext } from "react";
+import ContextSample from "./ContextSample";
+
+export const AppContext = createContext();
+
+const App = () => {
+  const user = {
+    name: "이강윤",
+    job: "개발자"
+  };
+
+  return (
+    <>
+      <AppContext.Provider value={user}>
+        <div>
+          <ContextSample />
+        </div>
+      </AppContext.Provider>
+    </>
+  )
+}
+
+export default App;
+```
+
+## useReducer
+
+- useState를 대체할 수 있는 함수
+
+- 조금 더 복잡한 상태관리가 필요한 경우 reducer를 사용
+
+- `이전 상태와 Action을 합쳐 새로운 state`를 생성
+
+> reducer 함수
+
+```js
+function reducer(state, action) {
+  return { ... };
+}
+```
+
+- 리듀서는 현재 상태(state)와 업데이트를 위해 필요한 정보를 담은 액션(action) 값을 전달받아 새로운 상태를 반환
+
+- 리듀서 함수에서 새로운 상태를 만들 때는 꼭 `불변성`을 지켜주어야 함
+
+> dispatch 함수
+
+- reducer 함수를 실행시킴
+
+- action 객체를 인자로 받으며, action 객체는 어떤 행동인지를 나타내는 type속성과 해당 행동과 관련된 데이터(payload)를 담고 있다.
+
+> useReducer로 Counter 만들기
+
+```js
+// CounterReducer.js
+
+import { useReducer } from "react";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + action.payload };
+    case "decrement":
+      return { count: state.count - action.payload };
+    default:
+      throw new Error("unsupported action type: ", action.type)
+  }
+}
+
+const CounterReducer = () => {
+  const initialState = { count: 0 };
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  return (
+    <>
+      <h2>{state.count}</h2>
+      <button onClick={() => dispatch({ type: "increment", payload: 1 })}>증가</button>
+      <button onClick={() => dispatch({ type: "decrement", payload: 1 })}>감소</button>
+      <button onClick={() => dispatch({ type: "asdasdasd", payload: 1 })}>에러</button>
+    </>
+  )
+}
+
+export default CounterReducer
+```
