@@ -248,7 +248,7 @@ function reducer(state, action) {
 
 - reducer 함수를 실행시킴
 
-- action 객체를 인자로 받으며, action 객체는 어떤 행동인지를 나타내는 type속성과 해당 행동과 관련된 데이터(payload)를 담고 있다.
+- action 객체를 인자로 받으며, action 객체는 어떤 행동인지를 나타내는 `type속성`과 해당 `행동과 관련된 데이터(payload)`를 담고 있다.
 
 > useReducer로 Counter 만들기
 
@@ -283,4 +283,60 @@ const CounterReducer = () => {
 }
 
 export default CounterReducer
+```
+
+- useReducer의 `첫 번째 파라미터에는 reducer 함수`, `두 번째 파라미터는 해당 리듀서의 기본값`을 넣어준다.
+
+## useMemo
+
+- 함수형 컴포넌트 내부에서 발생하는 연산을 최적화
+
+- 함수형 컴포넌트에 Memoization을 적용하여 렌더링이 발생했을 때, `이전 렌더링과 현재 렌더링을 비교하여 동일한 값이면 저장해두었던 값을 재사용`하여 렌더링 속도를 향상
+
+> useMemo 사용해보기
+
+```js
+// Average.js
+
+import { useMemo, useState } from "react";
+
+const getAverage = numbers => {
+  console.log('평균 계산 중..');
+  if (numbers.length === 0) return 0;
+  const sum = numbers.reduce((a, b) => a + b);
+  return sum / numbers.length;
+}
+
+const Average = () => {
+  const [list, setList] = useState([]);
+  const [number, setNumber] = useState('');
+
+  const onChange = e => {
+    setNumber(e.target.value);
+  };
+  const onInsert = () => {
+    const nextList = list.concat(parseInt(number));
+    setList(nextList);
+    setNumber('');
+  }
+
+  const avg = useMemo(() => getAverage(list), [list]);
+
+  return (
+    <div>
+      <input value={number} onChange={onChange} />
+      <button onClick={onInsert}>등록</button>
+      <ul>
+        {list.map((value, index) => (
+          <li key={index}>{value}</li>
+        ))}
+      </ul>
+      <div>
+        <b>평균값:</b> {avg}
+      </div>
+    </div>
+  )
+}
+
+export default Average;
 ```
