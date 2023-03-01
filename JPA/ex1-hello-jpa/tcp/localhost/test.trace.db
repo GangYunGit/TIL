@@ -1,0 +1,15 @@
+2023-02-01 23:15:16 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+/* insert hellojpa.Member */ insert into Member (name, id) values (?, ?) [42102-199]
+2023-02-01 23:15:49 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+/* insert hellojpa.Member */ insert into Member (name, id) values (?, ?) [42102-199]
+2023-02-01 23:19:11 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+/* insert hellojpa.Member */ insert into Member (name, id) values (?, ?) [42102-199]
+2023-02-27 21:03:54 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+/* insert hellojpa.Member */ insert into Member (name, id) values (?, ?) [42102-200]
+2023-02-27 21:14:45 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "MEMBER" not found; SQL statement:
+/* insert hellojpa.Member */ insert into Member (name, id) values (?, ?) [42102-200]
