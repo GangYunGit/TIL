@@ -19,14 +19,36 @@ public class JpaMain {
         tx.begin();
 
         try {
+            // 팀 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
+            // 회원 저장
             Member member = new Member();
-            member.setUsername("C");
-
-            System.out.println("===================");
+            member.setUsername("member1");
+            member.setTeam(team);   // 단방향 연관관계 설정, 참조 저장
             em.persist(member);
-            System.out.println("member.id = " + member.getId());
-            System.out.println("===================");
+
+            em.flush();
+            em.clear();
+
+            // 멤버 조회
+            Member findMember = em.find(Member.class, member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
+
+            for (Member m : members) {
+                System.out.println("m = " + m.getUsername());
+            }
+
+            // 새로운 팀B
+            Team teamB = new Team();
+            teamB.setName("TeamB");
+            em.persist(teamB);
+
+            // 회원1에 새로운 팀B 설정
+            member.setTeam(teamB);
+
             tx.commit();
         } catch (Exception e) {
             // EntityManager close
