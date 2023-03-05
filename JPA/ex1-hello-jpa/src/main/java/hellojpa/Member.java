@@ -1,25 +1,24 @@
 package hellojpa;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
+@SequenceGenerator(
+        name = "MEMBER_SEQ_GENERATOR",
+        sequenceName = "MEMBER_SEQ",
+        initialValue = 1, allocationSize = 1)
 public class Member {
 
-    public Member() {
-
-    }
-
-    public Member(long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "MEMBER_SEQ_GENERATOR")
     private Long id;
-    private String name;
+
+    @Column(name = "name")
+    private String username;
 
     public Long getId() {
         return id;
@@ -29,11 +28,16 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+    public Member() {
+    }
+
+
 }

@@ -19,14 +19,15 @@ public class JpaMain {
         tx.begin();
 
         try {
-                Member member = em.find(Member.class, 201L);
-                member.setName("asdasd");
 
-                em.detach(member);
+            Member member = new Member();
+            member.setUsername("C");
 
-                System.out.println("=====================");
-                tx.commit();
-                System.out.println("커밋 완료!!!!!!!");
+            System.out.println("===================");
+            em.persist(member);
+            System.out.println("member.id = " + member.getId());
+            System.out.println("===================");
+            tx.commit();
         } catch (Exception e) {
             // EntityManager close
             em.close();

@@ -26,7 +26,7 @@
             <!-- SQL batch 옵션 -->
              <property name="hibernate.jdbc.batch_size" value="10"/>
             <!-- application 실행 시 ddl 전략 -->
-            <!-- <property name="hibernate.hbm2ddl.auto" value="create"/>-->
+             <property name="hibernate.hbm2ddl.auto" value="create"/>
         </properties>
     </persistence-unit>
 </persistence>
