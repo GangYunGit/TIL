@@ -9,18 +9,18 @@ public class Team {
 
     @Id @GeneratedValue
     @Column(name = "TEAM_ID")
-    private Long Id;
+    private Long id;
     private String name;
 
     @OneToMany(mappedBy = "team")
     private List<Member> members = new ArrayList<Member>();
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {

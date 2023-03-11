@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class MemberProduct {
 
     @Id @GeneratedValue
-    private Long Id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")

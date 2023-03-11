@@ -11,7 +11,7 @@ import java.util.List;
 public class Product {
 
     @Id @GeneratedValue
-    private Long Id;
+    private Long id;
 
     private String name;
 
@@ -19,11 +19,11 @@ public class Product {
     private List<MemberProduct> memberProducts = new ArrayList<MemberProduct>();
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
@@ -32,5 +32,13 @@ public class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<MemberProduct> getMemberProducts() {
+        return memberProducts;
+    }
+
+    public void setMemberProducts(List<MemberProduct> memberProducts) {
+        this.memberProducts = memberProducts;
     }
 }
