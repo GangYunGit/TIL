@@ -20,32 +20,16 @@ public class JpaMain {
 
         try {
 
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
-
             Member member = new Member();
             member.setUsername("member1");
 
-            // 역방향 연관관계
-            team.getMembers().add(member);
-            // 연관관계의 주인에 값 설정
-            member.setTeam(team);
-
             em.persist(member);
 
-//            em.flush();
-//            em.clear();
+            Team team = new Team();
+            team.setName("teamA");
+            team.getMembers().add(member);
 
-            // select하면서 1차 캐시에 저장
-            Team findTeam = em.find(Team.class, team.getId());
-            List<Member> members = findTeam.getMembers();
-
-            System.out.println("================");
-            for (Member m : members) {
-                System.out.println("m = " + m.getUsername());
-            }
-            System.out.println("================");
+            em.persist(team);
 
             tx.commit();
         } catch (Exception e) {
