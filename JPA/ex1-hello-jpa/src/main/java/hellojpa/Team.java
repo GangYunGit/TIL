@@ -9,7 +9,7 @@ public class Team {
 
     @Id @GeneratedValue
     @Column(name = "TEAM_ID")
-    private Long Id;
+    private Long id;
     private String name;
 
     @OneToMany
@@ -17,11 +17,11 @@ public class Team {
     private List<Member> members = new ArrayList<>();
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(Long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {

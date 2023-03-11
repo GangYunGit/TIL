@@ -12,24 +12,23 @@ public class JpaMain {
 
         EntityManager em = emf.createEntityManager();
 
-        // JPA에서는 transaction이라는 단위가 매우 중요
         EntityTransaction tx = em.getTransaction();
 
-        // 엔티티 매니저는 데이터 변경 시 트랜잭션을 시작해주어야 함.
         tx.begin();
 
         try {
+            Movie movie = new Movie();
+            movie.setDirector("봉준호");
+            movie.setActor("송강호");
+            movie.setName("괴물");
+            movie.setPrices(10000);
+            em.persist(movie);
 
-            Member member = new Member();
-            member.setUsername("member1");
+            em.flush();
+            em.clear();
 
-            em.persist(member);
-
-            Team team = new Team();
-            team.setName("teamA");
-            team.getMembers().add(member);
-
-            em.persist(team);
+            Movie findMovie = em.find(Movie.class, movie.getId());
+            System.out.println("findMovie : " + findMovie);
 
             tx.commit();
         } catch (Exception e) {
