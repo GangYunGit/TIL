@@ -1,5 +1,6 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Order;
 
 import javax.persistence.EntityManager;
@@ -11,19 +12,15 @@ import java.util.List;
 public class JpaMain {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
-
         EntityManager em = emf.createEntityManager();
-
-        // JPA에서는 transaction이라는 단위가 매우 중요
         EntityTransaction tx = em.getTransaction();
-
-        // 엔티티 매니저는 데이터 변경 시 트랜잭션을 시작해주어야 함.
         tx.begin();
 
         try {
-
-//            Order order = new Order();
-//            order.addOrderItem();
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영한");
+            em.persist(book);
 
             tx.commit();
         } catch (Exception e) {
