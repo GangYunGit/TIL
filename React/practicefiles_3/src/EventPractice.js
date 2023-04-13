@@ -20,7 +20,8 @@ class EvenPractice extends Component {
                 {
                   message: e.target.value
                 }
-              )
+              );
+              console.log(e.target.value)
             }
           }
         />
