@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import axios from "axios";
 import ItemList from '@/component/ItemList';
 import { Header, Divider, Loader } from 'semantic-ui-react'
+import { GetStaticProps } from 'next';
+import { ParsedUrlQuery } from 'querystring';
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,47 +19,84 @@ export interface ItemInfo {
   description: string;
 }
 
-export default function Home() {
+interface IParams extends ParsedUrlQuery {
+  id: string;
+}
 
-  const API_URL = "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline";
-  const [list, setList] = useState<ItemInfo[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+// export default function Home() {
 
-  function getApi() {
-    axios.get(API_URL).then((response) => {
-      console.log(response);
-      setList(response.data);
-      setIsLoading(false);
-    })
-  }
+//   const API_URL = "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline";
+//   const [list, setList] = useState<ItemInfo[]>([]);
+//   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    getApi()
-  }, [])
+//   function getApi() {
+//     axios.get(API_URL).then((response) => {
+//       console.log(response);
+//       setList(response.data);
+//       setIsLoading(false);
+//     })
+//   }
+
+//   useEffect(() => {
+//     getApi()
+//   }, [])
+
+//   return (
+//     <div>
+//       <Head>
+//         <title>Home | 이강윤</title>
+//       </Head>
+//       {isLoading && (
+//         <div style={{ padding: "300px 0" }}>
+//           <Loader inline="centered" active>
+//             Loading
+//           </Loader>
+//         </div>
+//       )}
+//       {!isLoading && (
+//         <>
+//           <Header as="h3" style={{ paddingTop: 20 }}>베스트 상품</Header>
+//           <Divider />
+//           <ItemList list={list.slice(0, 9)} />
+//           <Divider />
+//           <Header as="h3">신상품</Header>
+//           <Divider />
+//           <ItemList list={list.slice(0, 9)} />
+//         </>
+//       )}
+//     </div>
+//   )
+// }
+
+export default function Home({ list }: { list: ItemInfo[] }) {
 
   return (
     <div>
       <Head>
         <title>Home | 이강윤</title>
       </Head>
-      {isLoading && (
-        <div style={{ padding: "300px 0" }}>
-          <Loader inline="centered" active>
-            Loading
-          </Loader>
-        </div>
-      )}
-      {!isLoading && (
-        <>
-          <Header as="h3" style={{ paddingTop: 20 }}>베스트 상품</Header>
-          <Divider />
-          <ItemList list={list.slice(0, 9)} />
-          <Divider />
-          <Header as="h3">신상품</Header>
-          <Divider />
-          <ItemList list={list.slice(0, 9)} />
-        </>
-      )}
+      <>
+        <Header as="h3" style={{ paddingTop: 20 }}>베스트 상품</Header>
+        <Divider />
+        <ItemList list={list.slice(0, 9)} />
+        <Divider />
+        <Header as="h3">신상품</Header>
+        <Divider />
+        <ItemList list={list.slice(0, 9)} />
+      </>
     </div>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const apiUrl = "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline";
+  const response = await axios.get(apiUrl);
+  const data = response.data;
+
+  return {
+    props: {
+      list: data,
+      name: "PRODUCTION"
+    }
+  }
 }

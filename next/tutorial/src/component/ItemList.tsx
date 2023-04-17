@@ -13,7 +13,7 @@ export default function ItemList({ list }: Iprops) {
         <Grid.Row>
           {list.map((item, index) => (
             <Grid.Column key={index}>
-              <Link href="/view/[id]" as={`/view/${item.id}`}>
+              <Link href="/detail/[id]" as={`/detail/${item.id}`}>
                 <img src={item.image_link} alt={item.name} />
                 <strong>{item.name}</strong>
                 <br />

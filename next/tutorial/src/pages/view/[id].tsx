@@ -4,7 +4,7 @@ import { ItemInfo } from "..";
 import Head from "next/head";
 import { useEffect } from 'react'
 
-const Post = ({ item }) => {
+const Post = ({ item }: { item: any }) => {
   const initialItem: ItemInfo = {
     id: "",
     image_link: "",
