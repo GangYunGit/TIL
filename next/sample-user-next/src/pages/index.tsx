@@ -18,14 +18,16 @@ const getUserInfo = async () => {
 
 export default function Home() {
 
-  const { data: userList, isLoading, isError, error } = useQuery<User[], Error>(['user'], getUserInfo, { staleTime: 5 * 1000, refetchOnWindowFocus: false })
+  const { data: userList, isLoading, isError, error } = useQuery<User[], Error>(['user'], getUserInfo, { refetchOnWindowFocus: false, staleTime: 10 * 1000, cacheTime: 30 * 1000, refetchInterval: 30 * 1000 })
+  console.log(userList);
+
   return (
     <div className='text-20'>
       {userList?.map((userInfo) => (
         <Fragment key={userInfo.userId}>
-          <div>{userInfo.userId}</div>
-          <div>{userInfo.userHobby}</div>
-          <div>{userInfo.userName}</div>
+          <div>id: {userInfo.userId}</div>
+          <div>취미: {userInfo.userHobby}</div>
+          <div>이름: {userInfo.userName}</div>
           <hr />
         </Fragment>
       ))}
