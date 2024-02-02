@@ -156,3 +156,81 @@ var obj = {};
 obj[key] = 'value';
 console.log(obj[key]); // value
 ```
+
+## this
+
+- this란?
+
+  - 자신이 속한 객체 또는 자신이 생성할 인스턴스를 가리키는 자기 참조 변수
+
+- this의 특징
+
+  - this를 통해 자신이 속한 객체 또는 자신이 생성할 인스턴스의 프로퍼티나 메서드를 참조할 수 있음
+
+    ```javascript
+    // 1. 전역
+    console.log(this); // window => 전역 객체
+
+    // 2. 일반 함수 내부
+    function square(number) {
+      console.log(this); // window => 전역 객체
+      return number * number;
+    }
+    square(2);
+
+    // 3. 객체 메서드 내부
+    const person = {
+      name: 'Lee',
+      getName() {
+        console.log(this); // {name: 'Lee', getName: ƒ} => 메서드를 호출한 객체
+        return this.name;
+      },
+    };
+    console.log(person.getName()); // Lee
+
+    // 4. 생성자 함수
+    function Person(name) {
+      this.name = name;
+      console.log(this); // Person {name: 'Lee'} => 생성자 함수가 생성할 인스턴스
+    }
+    const me = new Person('Lee');
+    ```
+
+  - this는 자바스크립트 엔진에 의해 암묵적으로 생성되며, 함수를 호출하면 인자와 this가 암묵적으로 함수 내부에 전달됨
+  - `this가 가리키는 값(this 바인딩)`은 함수가 선언된 방식이 아니라 `함수를 호출하는 방식`에 의해 `동적`으로 결정됨
+  - 인자를 지역 변수처럼 사용할 수 있는 것처럼, this도 지역 변수로 사용할 수 있음
+
+- 화살표 함수
+
+  - 콜백 함수 내부에서 this가 전역 객체를 가리키는 문제를 해결하기 위해 등장
+  - 일반 함수는 호출 방식에 따라 동적으로 this에 객체가 바인딩 되지만, 화살표 함수는 함수를 선언할 떄 this에 바인딩할 객체가 정적으로 결정
+  - 화살표 함수 내부의 this는 언제나 상위 스코프의 this를 가리킴
+
+    ```javascript
+    const fn = {
+      title: 'Hello World!',
+      tags: [1, 2],
+      showTags() {
+        // 객체 내부 메서드에서의 this = 객체를 가리킴
+        this.tags.forEach(function (tag) {
+          console.log(tag);
+          console.log(this); // window
+          // => 콜백 함수가 일반 함수로서 호출되어 전역 객체를 가리킴
+        });
+      },
+    };
+    fn.showTags();
+
+    const arrfn = {
+      title: 'Hello World!',
+      tags: [1, 2],
+      showTags() {
+        this.tags.forEach((tag) => {
+          console.log(tag);
+          console.log(this); // {title: 'Hello World!', tags: Array(2), showTags: ƒ}
+          // 콜백 함수가 arrow function인 경우 상위 스코프의 this를 가리킴
+        });
+      },
+    };
+    arrfn.showTags();
+    ```
