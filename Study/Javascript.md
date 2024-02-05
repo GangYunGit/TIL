@@ -238,6 +238,87 @@ console.log(obj[key]); // value
 ## 클로저(Closure)
 
 - 클로저란?
-  - 자바스크립트 고유의 개념이 아니라 **함수를 일급 객체로 취급**하는 **함수형 프로그래밍 언어**(하스켈, 리스프, 얼랭, 스칼라 등)에서 사용되는 특성
+
   - MDN문서 : "클로저는 함수와 그 함수가 선언 됐을 때의 렉시컬 환경과의 조합이다."
-  - 내부함수가 외부함수의 렉시컬스코프에 접근할 수 있는 것을 가리킴
+  - 함수가 선언된 환경의 `렉시컬스코프를 기억`하여, 함수가 스코프 밖에서 실행될 때에도 내부함수가 외부함수의 스코프에 접근할 수 있게 해주는 방법
+  - `외부함수의 실행이 끝나 소멸된 이후에도 내부 함수가 외부 함수의 변수에 접근할 수 있게` 해줌
+
+    ```javascript
+    // counter는 outer 함수
+    // changeCount는 inner함수
+    // 객체를 리턴하고 있고 객체 안에는 increase, decrease, show와 같은 inner함수들을 저장
+
+    const counter = function () {
+      let count = 0;
+      function changeCount(number) {
+        count += number;
+      }
+      return {
+        increase: function () {
+          changeCount(1);
+        },
+        decrease: function () {
+          changeCount(-1);
+        },
+        show: function () {
+          alert(count);
+        },
+      };
+    };
+
+    // counter를 실행하면 outer함수 스코프를 기억하고 있는 클로저들이 담긴 객체를 반환
+    // counterClosure는 counter함수 내부에 정의된 count나 changeCount에 접근 가능
+
+    const counterClosure = counter();
+    counterClosure.increase(); //
+    counterClosure.show(); // 1
+    counterClosure.decrease();
+    counterClosure.show(); // 0
+    ```
+
+- 클로저를 사용하는 이유
+  - 상태를 안전하게 변경하고 유지하기 위해 사용
+  - 상태가 의도치 않게 변경되지 않도록 `캡슐화를 통해 은닉`하고, `특정 함수에게만 상태 변경을 허용`하여 상태를 안전하게 변경하고 유지
+  - 전역 변수의 사용을 억제하여 모듈화
+
+## 콜백 함수와 비동기 처리
+
+- 콜백함수란?
+
+  - 함수의 매개변수를 통해 다른 함수의 내부로 전달되는 함수
+  - 매개변수를 통해 함수의 외부에서 전달받은 콜백 함수를 **고차 함수**라고 함.
+
+    ```javascript
+    function repeatFunc(n, func) {
+      for (let i = 0; i < n; i++) {
+        func(i);
+      }
+    }
+
+    function odd(i) {
+      if (i % 2) console.log(i);
+    }
+
+    function even(i) {
+      if (i % 2 == 0) console.log(i);
+    }
+    ```
+
+- 콜백함수와 비동기 처리
+
+  - 콜백함수를 이용하면 특정 조건에 따라 함수가 호출되도록 작성할 수 있는데, 이를 이용하여 비동기 처리를 순차적으로 동작시킬수 있다는 점에서 비동기 처리에 콜백 함수가 이용됨
+
+    ```javascript
+    // 콜백 헬
+    $.get('url', function (response) {
+      parseValue(response, function (id) {
+        auth(id, function (result) {
+          display(result, function (text) {
+            console.log(text);
+          });
+        });
+      });
+    });
+    ```
+
+  - 비동기 처리 과정 중 발생하는 에러 처리의 한계, 콜백 헬에 대한 문제를 극복하기 위해 ES6에서 `Promise` 개념이 등장
