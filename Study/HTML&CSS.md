@@ -41,3 +41,28 @@
 
 - important = 무조건 우선, 인라인 스타일 = 1000점, id 선택자 = 100점, class 선택자 = 10점, 태그 선택자 = 1점, ... 이렇게 점수를 합산하여 css의 우선순위를 정한다.
 - 중요도와 적용 범위가 같다면 가장 나중에 나온 스타일이 덮어쓰기 됨.
+
+## Display 속성
+
+- [mdn 문서 - CSS display](https://developer.mozilla.org/en-US/docs/Web/CSS/display)
+- display 속성은 요소를 블록 혹은 인라인 요소 중 어떤 방법으로 취급될지와, flow, grid, flex처럼 자식 요소를 배치할 때 사용됨
+- display 속성의 값은 block, inline, inline-block, flex, grid 등이 있음.
+
+- 📌display: block
+
+  - 블럭처럼 위에서 아래로 쌓이는 특징이 있음.
+  - `<div>, <h1>,  <p>,  <ul>,  <ol>, <form>` 등의 요소는 대표적인 block 속성
+  - 가로 영역을 모두 차지하기 때문에 block 특성을 가진 요소와 인접된 요소는 양 옆으로 배치될 수 없음.
+  - width, height, margin, padding의 설정이 가능
+
+- 📌display: inline
+
+  - 각 요소를 인접된 요소의 양 옆으로 나열할 수 있음.
+  - `<span>, <a>, <img>, <svg>` 요소가 대표적인 inline 속성.
+  - width, height 설정이 불가능.
+  - margin은 left, right 값만 설정 가능.
+  - padding은 상하좌우 모두 설정 가능하지만, 상하 부분의 padding은 다른 요소에 영향을 주지 못함.
+
+- 📌display: inline-block
+  - 요소의 형태는 block의 특징을 가지고 있고, 요소의 배치는 inline의 특징을 가지고 있음.  
+    쉽게 말해 외형을 block처럼 자유롭게 조절할 수 있으며, inline처럼 각 요소를 양 옆으로 배치가 가능.
