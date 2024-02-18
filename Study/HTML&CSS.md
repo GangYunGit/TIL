@@ -185,7 +185,7 @@
 - **position: absolute**
 
   - absolute의 뜻이랑은 다르게 절대적인 기준이 아니라, `상위 요소를 기준`으로 배치되는 속성
-  - absolute 속성이 적용된 요소는 `HTML 문서 상에서 독립`되어 다른 요소들과 상호작용하지 않는다.
+  - absolute 속성이 적용된 요소는 `HTML 문서 상에서 독립(Normal flow를 벗어남)`되어 다른 요소들과 상호작용하지 않는다.
   - DOM을 기준으로 `상위 요소들 중, position 속성이 static이 아닌 가장 가까운 상위요소`가 배치 기준으로 설정됨.
   - 모든 상위 요소에 position 요소가 static이 아닌 요소가 없다면 `<body>`가 배치 기준이 됨
 
