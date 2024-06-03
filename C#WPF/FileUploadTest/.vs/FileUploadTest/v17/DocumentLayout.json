@@ -3,12 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{13246667-E19A-4096-9814-59491393B55C}|FileUploadTest.csproj|c:\\users\\user\\desktop\\wpf_practice\\fileuploadtest\\newwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{13246667-E19A-4096-9814-59491393B55C}|FileUploadTest.csproj|solutionrelative:newwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13246667-E19A-4096-9814-59491393B55C}|FileUploadTest.csproj|c:\\users\\user\\desktop\\wpf_practice\\fileuploadtest\\fileuploadtest.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{13246667-E19A-4096-9814-59491393B55C}|FileUploadTest.csproj|solutionrelative:fileuploadtest.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{13246667-E19A-4096-9814-59491393B55C}|FileUploadTest.csproj|c:\\users\\user\\desktop\\wpf_practice\\fileuploadtest\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{13246667-E19A-4096-9814-59491393B55C}|FileUploadTest.csproj|solutionrelative:mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{13246667-E19A-4096-9814-59491393B55C}|FileUploadTest.csproj|c:\\users\\user\\desktop\\wpf_practice\\fileuploadtest\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{13246667-E19A-4096-9814-59491393B55C}|FileUploadTest.csproj|solutionrelative:mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{13246667-E19A-4096-9814-59491393B55C}|FileUploadTest.csproj|c:\\users\\user\\desktop\\wpf_practice\\fileuploadtest\\newwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{13246667-E19A-4096-9814-59491393B55C}|FileUploadTest.csproj|solutionrelative:newwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,11 +30,63 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "NewWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\NewWindow.xaml",
+              "RelativeDocumentMoniker": "NewWindow.xaml",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\NewWindow.xaml",
+              "RelativeToolTip": "NewWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2024-06-03T13:34:55.247Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "FileUploadTest",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\FileUploadTest.csproj",
+              "RelativeDocumentMoniker": "FileUploadTest.csproj",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\FileUploadTest.csproj",
+              "RelativeToolTip": "FileUploadTest.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-06-03T14:34:18.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "NewWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\NewWindow.xaml.cs",
+              "RelativeDocumentMoniker": "NewWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\NewWindow.xaml.cs",
+              "RelativeToolTip": "NewWindow.xaml.cs",
+              "ViewState": "AQIAACcAAAAAAAAAAAAAwDMAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T13:50:36.509Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\MainWindow.xaml.cs",
+              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\MainWindow.xaml.cs",
+              "RelativeToolTip": "MainWindow.xaml.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAIwEIAAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T13:32:56.461Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "MainWindow.xaml",
               "DocumentMoniker": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\MainWindow.xaml",
               "RelativeDocumentMoniker": "MainWindow.xaml",
@@ -30,19 +94,6 @@
               "RelativeToolTip": "MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2024-05-20T09:52:38.346Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\MainWindow.xaml.cs",
-              "RelativeDocumentMoniker": "MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\MainWindow.xaml.cs",
-              "RelativeToolTip": "MainWindow.xaml.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAfAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-20T09:52:36.482Z",
               "EditorCaption": ""
             }
           ]

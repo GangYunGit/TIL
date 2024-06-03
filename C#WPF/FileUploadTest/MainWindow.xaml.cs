@@ -57,5 +57,14 @@ namespace FileUploadTest
                 }
             }
         }
+
+        private void BtnOpenWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Window newWindow = new NewWindow();
+            newWindow.Top = this.Top + (this.ActualHeight - newWindow.Height) / 2;
+            newWindow.Left = this.Left + (this.ActualWidth - newWindow.Width) / 2;
+
+            newWindow.ShowDialog();
+        }
     }
 }

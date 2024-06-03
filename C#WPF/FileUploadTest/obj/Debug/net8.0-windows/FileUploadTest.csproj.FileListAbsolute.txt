@@ -18,3 +18,8 @@ C:\Users\USER\Desktop\WPF_practice\FileUploadTest\obj\Debug\net8.0-windows\refin
 C:\Users\USER\Desktop\WPF_practice\FileUploadTest\obj\Debug\net8.0-windows\FileUploadTest.pdb
 C:\Users\USER\Desktop\WPF_practice\FileUploadTest\obj\Debug\net8.0-windows\FileUploadTest.genruntimeconfig.cache
 C:\Users\USER\Desktop\WPF_practice\FileUploadTest\obj\Debug\net8.0-windows\ref\FileUploadTest.dll
+C:\Users\USER\Desktop\WPF_practice\FileUploadTest\obj\Debug\net8.0-windows\NewWindow.g.cs
+C:\Users\USER\Desktop\WPF_practice\FileUploadTest\obj\Debug\net8.0-windows\NewWindow.baml
+C:\Users\USER\Desktop\WPF_practice\FileUploadTest\obj\Debug\net8.0-windows\FileUploadTest.csproj.AssemblyReference.cache
+C:\Users\USER\Desktop\WPF_practice\FileUploadTest\bin\Debug\net8.0-windows\WpfAnimatedGif.dll
+C:\Users\USER\Desktop\WPF_practice\FileUploadTest\obj\Debug\net8.0-windows\FileUplo.B7518879.Up2Date

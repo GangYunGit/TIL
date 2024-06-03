@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "0e/eZhVSL6DdMYNqo7Qz9lBirAyViYKUx7btXsJbzxuk7xN8NpJEan5LZAsi2jvG2mESuU7i6QPrSs4wwiTZcA==",
+  "dgSpecHash": "9jp1R36S7CHaKtFgF2vcB4RXuItalbT/CabgwrvBuQmxTPLdKMV8u8ubfQErjyW/QQBhxF/ZmAn3If2gpTespw==",
   "success": true,
   "projectFilePath": "C:\\Users\\USER\\Desktop\\WPF_practice\\FileUploadTest\\FileUploadTest.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\USER\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
+  ],
   "logs": []
 }
